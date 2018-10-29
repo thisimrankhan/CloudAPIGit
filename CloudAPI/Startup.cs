@@ -26,6 +26,9 @@ using System.Text;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using FluentValidation.AspNetCore;
+using CloudAPI.ApplicationCore.Interfaces;
+using CloudAPI.ApplicationCore.Services;
+using CloudAPI.Infrastructure.Data;
 
 namespace CloudAPI
 {
@@ -48,14 +51,17 @@ namespace CloudAPI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("CloudAPI")));
+            
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
-
-            // Register the ConfigurationBuilder instance of FacebookAuthSettings
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IRecipieService, RecipieService>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
-
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
-
+            
             // jwt wire up
             // Get options from app settings
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));

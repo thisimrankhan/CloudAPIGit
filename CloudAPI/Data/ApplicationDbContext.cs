@@ -12,5 +12,6 @@ namespace CloudAPI.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Recipie> Recipies { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-
+using CloudAPI.ApplicationCore.Entities;
 
 namespace CloudAPI.Models.Entities
 {
-    public class Customer
+    public class Customer: BaseEntity
     {
         public int Id { get; set; }
         public string IdentityId { get; set; }
