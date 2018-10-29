@@ -19,7 +19,7 @@ namespace CloudAPI.Models
         public string Subject { get; set; }
 
         /// <summary>
-        /// 4.1.3.  "aud" (Audience) Claim - The "aud" (audience) claim identifies the recipients that the JWT is intended for.
+        /// 4.1.3.  "aud" (Audience) Claim - The "aud" (audience) claim identifies the Recipents that the JWT is intended for.
         /// </summary>
         public string Audience { get; set; }
 

@@ -1,16 +1,19 @@
 using CloudAPI.ApplicationCore.Entities;
+using System;
 
-namespace CloudAPI.Models.Entities
+namespace CloudAPI.ViewModels
 {
-    public class Recipie: BaseEntity
+    public class RecipeViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public AppUser Identity { get; set; }  // navigation property
+        public string UserId { get; set; }
         public string Description { get; set; }
         public string Ingredients { get; set; }
         public string Image { get; set; }
         public int Rating { get; set; }
-
+        public int LikeCount { get; set; }
+        public bool isLiked { get; set; }
+        public DateTime RecipeDate { get; set; }
     }
 }

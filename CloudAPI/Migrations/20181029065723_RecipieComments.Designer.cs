@@ -4,14 +4,16 @@ using CloudAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CloudAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181029065723_RecipieComments")]
+    partial class RecipieComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,6 +109,8 @@ namespace CloudAPI.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("IdentityId");
+
                     b.Property<string>("Image");
 
                     b.Property<string>("Ingredients");
@@ -117,68 +121,11 @@ namespace CloudAPI.Migrations
 
                     b.Property<DateTime>("RecipeDate");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Recipe");
-                });
+                    b.HasIndex("IdentityId");
 
-            modelBuilder.Entity("CloudAPI.Models.Entities.RecipeComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comment");
-
-                    b.Property<DateTime>("CommentDate");
-
-                    b.Property<int>("RecipeId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RecipeComment");
-                });
-
-            modelBuilder.Entity("CloudAPI.Models.Entities.RecipeLike", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsLiked");
-
-                    b.Property<DateTime>("LikedDate");
-
-                    b.Property<int>("RecipeId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RecipeLike");
-                });
-
-            modelBuilder.Entity("CloudAPI.Models.Entities.RecipeRating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Rating");
-
-                    b.Property<DateTime>("RatingDate");
-
-                    b.Property<int>("RecipeId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RecipeRating");
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -292,6 +239,13 @@ namespace CloudAPI.Migrations
                 });
 
             modelBuilder.Entity("CloudAPI.Models.Entities.Customer", b =>
+                {
+                    b.HasOne("CloudAPI.Models.Entities.AppUser", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId");
+                });
+
+            modelBuilder.Entity("CloudAPI.Models.Entities.Recipe", b =>
                 {
                     b.HasOne("CloudAPI.Models.Entities.AppUser", "Identity")
                         .WithMany()

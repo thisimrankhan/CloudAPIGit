@@ -57,7 +57,7 @@ namespace CloudAPI
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<IRecipieService, RecipieService>();
+            services.AddScoped<IRecipeService, RecipeService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();

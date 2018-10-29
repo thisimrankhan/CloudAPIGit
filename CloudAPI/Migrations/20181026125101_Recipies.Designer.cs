@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181026125101_Recipies")]
-    partial class Recipies
+    [Migration("20181026125101_Recipes")]
+    partial class Recipes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,7 +101,7 @@ namespace CloudAPI.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("CloudAPI.Models.Entities.Recipie", b =>
+            modelBuilder.Entity("CloudAPI.Models.Entities.Recipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +123,7 @@ namespace CloudAPI.Migrations
 
                     b.HasIndex("IdentityId");
 
-                    b.ToTable("Recipies");
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -243,7 +243,7 @@ namespace CloudAPI.Migrations
                         .HasForeignKey("IdentityId");
                 });
 
-            modelBuilder.Entity("CloudAPI.Models.Entities.Recipie", b =>
+            modelBuilder.Entity("CloudAPI.Models.Entities.Recipe", b =>
                 {
                     b.HasOne("CloudAPI.Models.Entities.AppUser", "Identity")
                         .WithMany()

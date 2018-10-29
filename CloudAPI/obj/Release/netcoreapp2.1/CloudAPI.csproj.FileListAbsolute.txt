@@ -12,3 +12,17 @@ E:\Development\CloudAPI\CloudAPI\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.Raz
 E:\Development\CloudAPI\CloudAPI\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.dll
 E:\Development\CloudAPI\CloudAPI\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.pdb
 E:\Development\CloudAPI\CloudAPI\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.csprojResolveAssemblyReference.cache
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\bin\Release\netcoreapp2.1\CloudAPI.deps.json
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\bin\Release\netcoreapp2.1\CloudAPI.runtimeconfig.json
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\bin\Release\netcoreapp2.1\CloudAPI.runtimeconfig.dev.json
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\bin\Release\netcoreapp2.1\CloudAPI.dll
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\bin\Release\netcoreapp2.1\CloudAPI.pdb
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.csprojResolveAssemblyReference.cache
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.csproj.CoreCompileInputs.cache
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.RazorAssemblyInfo.cache
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.RazorAssemblyInfo.cs
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.AssemblyInfoInputs.cache
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.AssemblyInfo.cs
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.RazorTargetAssemblyInfo.cache
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.dll
+E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Release\netcoreapp2.1\CloudAPI.pdb

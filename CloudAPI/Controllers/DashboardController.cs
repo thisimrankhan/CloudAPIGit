@@ -32,11 +32,11 @@ namespace CloudAPI.Controllers
             [HttpGet]
             public async Task<IActionResult> Home()
             {
-                var a = _customerService.GetRecipieAsync(1).Result;
+                //var a = _customerService.GetRecipeAsync(1).Result;
 
                 //var userId = _caller.Claims.Single(c => c.Type == "id");
                 //var customer = await _appDbContext.Customers.Include(c => c.Identity).SingleAsync(c => c.Identity.Id == userId.Value);
-                return new OkObjectResult(a);
+                return new OkObjectResult("a");
                   //return new OkObjectResult(new
                   //{
                   //  Message = "This is secure API and user data!",

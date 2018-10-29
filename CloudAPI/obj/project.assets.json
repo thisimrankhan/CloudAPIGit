@@ -11768,11 +11768,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Development\\CloudAPI\\CloudAPI\\CloudAPI\\CloudAPI.csproj",
+      "projectUniqueName": "E:\\Development\\CloudAPIGit\\CloudAPIGit\\CloudAPI\\CloudAPI.csproj",
       "projectName": "CloudAPI",
-      "projectPath": "E:\\Development\\CloudAPI\\CloudAPI\\CloudAPI\\CloudAPI.csproj",
+      "projectPath": "E:\\Development\\CloudAPIGit\\CloudAPIGit\\CloudAPI\\CloudAPI.csproj",
       "packagesPath": "C:\\Users\\imran.khan\\.nuget\\packages\\",
-      "outputPath": "E:\\Development\\CloudAPI\\CloudAPI\\CloudAPI\\obj\\",
+      "outputPath": "E:\\Development\\CloudAPIGit\\CloudAPIGit\\CloudAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

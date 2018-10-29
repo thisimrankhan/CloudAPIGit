@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CloudAPI.Migrations
 {
-    public partial class Recipies : Migration
+    public partial class Recipes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Recipies",
+                name: "Recipes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -22,9 +22,9 @@ namespace CloudAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recipies", x => x.Id);
+                    table.PrimaryKey("PK_Recipes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Recipies_AspNetUsers_IdentityId",
+                        name: "FK_Recipes_AspNetUsers_IdentityId",
                         column: x => x.IdentityId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -32,15 +32,15 @@ namespace CloudAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Recipies_IdentityId",
-                table: "Recipies",
+                name: "IX_Recipes_IdentityId",
+                table: "Recipes",
                 column: "IdentityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Recipies");
+                name: "Recipes");
         }
     }
 }

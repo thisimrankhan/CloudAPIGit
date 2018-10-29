@@ -6,6 +6,5 @@ namespace CloudAPI.ApplicationCore.Interfaces
     public interface ICustomerService
     {
         Task<Customer> CreateCustomerAsync(int id);
-        Task<Recipie> GetRecipieAsync(int id);
     }
 }

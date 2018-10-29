@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 
 namespace CloudAPI.ApplicationCore.Interfaces
 {
-    public interface IRecipieService
+    public interface IRecipeRepository : IRepository<Recipe>, IAsyncRepository<Recipe>
     {
-        Task<List<Recipie>> GetRecipies();
-        Task<Recipie> GetRecipieById(int Id);
+        List<RecipeRating> GetRating(int recipeId);
     }
 }

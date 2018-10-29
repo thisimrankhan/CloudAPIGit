@@ -12,6 +12,9 @@ namespace CloudAPI.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Recipie> Recipies { get; set; }
+        public DbSet<Recipe> Recipe { get; set; }
+        public DbSet<RecipeComment> RecipeComment { get; set; }
+        public DbSet<RecipeLike> RecipeLike { get; set; }
+        public DbSet<RecipeRating> RecipeRating { get; set; }
     }
 }

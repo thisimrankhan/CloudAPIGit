@@ -4,14 +4,16 @@ using CloudAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CloudAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181029070111_RecipieLikes")]
+    partial class RecipieLikes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,6 +109,8 @@ namespace CloudAPI.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("IdentityId");
+
                     b.Property<string>("Image");
 
                     b.Property<string>("Ingredients");
@@ -117,9 +121,9 @@ namespace CloudAPI.Migrations
 
                     b.Property<DateTime>("RecipeDate");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("IdentityId");
 
                     b.ToTable("Recipe");
                 });
@@ -134,11 +138,13 @@ namespace CloudAPI.Migrations
 
                     b.Property<DateTime>("CommentDate");
 
+                    b.Property<string>("IdentityId");
+
                     b.Property<int>("RecipeId");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("IdentityId");
 
                     b.ToTable("RecipeComment");
                 });
@@ -149,15 +155,17 @@ namespace CloudAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("IdentityId");
+
                     b.Property<bool>("IsLiked");
 
                     b.Property<DateTime>("LikedDate");
 
                     b.Property<int>("RecipeId");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("IdentityId");
 
                     b.ToTable("RecipeLike");
                 });
@@ -168,15 +176,17 @@ namespace CloudAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("IdentityId");
+
                     b.Property<int>("Rating");
 
                     b.Property<DateTime>("RatingDate");
 
                     b.Property<int>("RecipeId");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("IdentityId");
 
                     b.ToTable("RecipeRating");
                 });
@@ -292,6 +302,34 @@ namespace CloudAPI.Migrations
                 });
 
             modelBuilder.Entity("CloudAPI.Models.Entities.Customer", b =>
+                {
+                    b.HasOne("CloudAPI.Models.Entities.AppUser", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId");
+                });
+
+            modelBuilder.Entity("CloudAPI.Models.Entities.Recipe", b =>
+                {
+                    b.HasOne("CloudAPI.Models.Entities.AppUser", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId");
+                });
+
+            modelBuilder.Entity("CloudAPI.Models.Entities.RecipeComment", b =>
+                {
+                    b.HasOne("CloudAPI.Models.Entities.AppUser", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId");
+                });
+
+            modelBuilder.Entity("CloudAPI.Models.Entities.RecipeLike", b =>
+                {
+                    b.HasOne("CloudAPI.Models.Entities.AppUser", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId");
+                });
+
+            modelBuilder.Entity("CloudAPI.Models.Entities.RecipeRating", b =>
                 {
                     b.HasOne("CloudAPI.Models.Entities.AppUser", "Identity")
                         .WithMany()
