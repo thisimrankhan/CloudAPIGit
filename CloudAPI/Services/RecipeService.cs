@@ -54,7 +54,18 @@ namespace CloudAPI.ApplicationCore.Services
         {
             var recipe = await _recipeRepository.GetByIdAsync(Id);
             RecipeViewModel recipeView = mapper.Map<Recipe, RecipeViewModel>(recipe);
+            recipeView.Comments = GetComments(recipeView.Id);
+            recipeView.Rating = GetRatingCount(recipeView.Id);
+            recipeView.LikeCount = GetLikeCount(recipeView.Id);
+            recipeView.isLiked = GetIsLike(recipeView.Id, recipeView.UserId);
             return recipeView;
+        }
+
+        private List<RecipeComment> GetComments(int recipeId)
+        {
+            var comments = _recipeCommentRepository.ListAllAsync().Result.Where(r => r.RecipeId == recipeId).OrderByDescending(r=> r.Id).ToList();
+            
+            return comments;
         }
 
         private int GetRatingCount(int recipeId)
@@ -62,7 +73,7 @@ namespace CloudAPI.ApplicationCore.Services
             var ratings = _recipeRatingRepository.ListAllAsync().Result.Where(r => r.RecipeId == recipeId);
             int count = ratings.Count();
             int sum = ratings.Sum(r => r.Rating);
-            int result = sum ==0 ? 0 : count / sum;
+            int result = count ==0 ? 0 : sum/count;
 
             return result;
         }

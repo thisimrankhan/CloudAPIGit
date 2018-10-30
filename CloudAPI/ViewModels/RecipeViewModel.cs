@@ -1,5 +1,7 @@
 using CloudAPI.ApplicationCore.Entities;
+using CloudAPI.Models.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace CloudAPI.ViewModels
 {
@@ -14,6 +16,7 @@ namespace CloudAPI.ViewModels
         public int Rating { get; set; }
         public int LikeCount { get; set; }
         public bool isLiked { get; set; }
+        public List<RecipeComment> Comments { get; set; }
         public DateTime RecipeDate { get; set; }
     }
 }
