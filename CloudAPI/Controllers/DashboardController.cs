@@ -34,7 +34,7 @@ namespace CloudAPI.Controllers
             {
                 //var a = _customerService.GetRecipeAsync(1).Result;
 
-                //var userId = _caller.Claims.Single(c => c.Type == "id");
+                var userId = _caller.Claims.Single(c => c.Type == "id");
                 //var customer = await _appDbContext.Customers.Include(c => c.Identity).SingleAsync(c => c.Identity.Id == userId.Value);
                 return new OkObjectResult("a");
                   //return new OkObjectResult(new

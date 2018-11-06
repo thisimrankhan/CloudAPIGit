@@ -6,6 +6,9 @@ using CloudAPI.ViewModels;
 using AutoMapper;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace CloudAPI.ApplicationCore.Services
 {
@@ -16,16 +19,22 @@ namespace CloudAPI.ApplicationCore.Services
         private readonly IAsyncRepository<RecipeRating> _recipeRatingRepository;
         private readonly IAsyncRepository<RecipeLike> _recipeLikeRepository;
         private readonly IAsyncRepository<RecipeComment> _recipeCommentRepository;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly ClaimsPrincipal _caller;
 
         public RecipeService(IAsyncRepository<Recipe> recipeRepository, 
             IAsyncRepository<RecipeRating> recipeRatingRepository, 
-            IAsyncRepository<RecipeLike> recipeLikeRepository, 
-            IAsyncRepository<RecipeComment> recipeCommentRepository)
+            IAsyncRepository<RecipeLike> recipeLikeRepository,
+            IAsyncRepository<RecipeComment> recipeCommentRepository,
+            UserManager<AppUser> userManager, 
+            IHttpContextAccessor httpContextAccessor)
         {
             _recipeRepository = recipeRepository;
             _recipeRatingRepository = recipeRatingRepository;
             _recipeLikeRepository = recipeLikeRepository;
             _recipeCommentRepository = recipeCommentRepository;
+            _userManager = userManager;
+            _caller = httpContextAccessor.HttpContext.User;
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -45,6 +54,7 @@ namespace CloudAPI.ApplicationCore.Services
                 recipieItem.Rating = GetRatingCount(recipieItem.Id);
                 recipieItem.LikeCount = GetLikeCount(recipieItem.Id);
                 recipieItem.isLiked = GetIsLike(recipieItem.Id, recipieItem.UserId);
+                recipieItem.UserName = GetUserName(recipieItem.UserId);
             }
 
             return recipeView;
@@ -54,8 +64,9 @@ namespace CloudAPI.ApplicationCore.Services
         {
             var recipe = await _recipeRepository.GetByIdAsync(Id);
             RecipeViewModel recipeView = mapper.Map<Recipe, RecipeViewModel>(recipe);
-            recipeView.Comments = GetComments(recipeView.Id);
+            recipeView.UserName = GetUserName(recipeView.UserId);
             recipeView.Rating = GetRatingCount(recipeView.Id);
+            recipeView.Comments= GetComments(recipeView.Id);
             recipeView.LikeCount = GetLikeCount(recipeView.Id);
             recipeView.isLiked = GetIsLike(recipeView.Id, recipeView.UserId);
             return recipeView;
@@ -66,6 +77,13 @@ namespace CloudAPI.ApplicationCore.Services
             var comments = _recipeCommentRepository.ListAllAsync().Result.Where(r => r.RecipeId == recipeId).OrderByDescending(r=> r.Id).ToList();
             
             return comments;
+        }
+
+        private string GetUserName(string UserId)
+        {
+            var user = _userManager.Users.Where(u=> u.Id == UserId).FirstOrDefault();
+            var userName = user != null ? user.FirstName : "";
+            return userName;
         }
 
         private int GetRatingCount(int recipeId)

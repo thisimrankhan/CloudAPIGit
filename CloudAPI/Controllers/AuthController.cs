@@ -1,5 +1,6 @@
 ﻿
- 
+
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CloudAPI.Auth;
@@ -29,6 +30,26 @@ namespace CloudAPI.Controllers
             _jwtOptions = jwtOptions.Value;
         }
 
+        [HttpPost("verifycode")]
+        public async Task<IActionResult> VerifyCode([FromBody]VerifyCodeViewModel verifyCode)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = _userManager.Users.Where(u=> u.Id == verifyCode.Id).FirstOrDefault();
+
+            IdentityResult result = null;
+            if(user.PhoneNumber == verifyCode.VerificationCode)
+            {
+                user.EmailConfirmed = true;
+                result = await _userManager.UpdateAsync(user);
+            }
+            return new OkObjectResult(result);
+        }
+
+
         // POST api/auth/login
         [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody]CredentialsViewModel credentials)
@@ -41,9 +62,9 @@ namespace CloudAPI.Controllers
             var identity = await GetClaimsIdentity(credentials.UserName, credentials.Password);
             if (identity == null)
             {
-                return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username or password.", ModelState));
+                return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username/password or verification failed.", ModelState));
             }
-
+            
           var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, credentials.UserName, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
           return new OkObjectResult(jwt);
         }
@@ -55,8 +76,11 @@ namespace CloudAPI.Controllers
 
             // get the user to verifty
             var userToVerify = await _userManager.FindByNameAsync(userName);
-
+            
             if (userToVerify == null) return await Task.FromResult<ClaimsIdentity>(null);
+            
+            //Email confirmation
+            if (!userToVerify.EmailConfirmed) return await Task.FromResult<ClaimsIdentity>(null);
 
             // check the credentials
             if (await _userManager.CheckPasswordAsync(userToVerify, password))
