@@ -13,5 +13,6 @@ namespace CloudAPI.ApplicationCore.Interfaces
         Task<RecipeRating> AddRating(RecipeRating rating);
         Task<RecipeLike> AddLike(RecipeLike like);
         Task<RecipeComment> AddComment(RecipeComment comment);
+        bool GetLikedRecipeById(string userId, int recipeId);
     }
 }

@@ -108,7 +108,29 @@ namespace CloudAPI.ApplicationCore.Services
 
         public async Task<RecipeLike> AddLike(RecipeLike like)
         {
-            return await _recipeLikeRepository.AddAsync(like);
+            var isAlreadyLiked = _recipeLikeRepository.ListAllAsync().Result.Where(c => c.UserId == like.UserId && c.RecipeId == like.RecipeId);
+
+            if (!isAlreadyLiked.Any())
+            {
+                return await _recipeLikeRepository.AddAsync(like);
+            }
+            else
+            {
+                var recipeLikeObj = isAlreadyLiked.FirstOrDefault();
+                recipeLikeObj.IsLiked = like.IsLiked;
+                recipeLikeObj.LikedDate = like.LikedDate;
+                return await _recipeLikeRepository.UpdateAsync(recipeLikeObj);
+            }
+        }
+
+        public bool GetLikedRecipeById(string userId, int recipeId)
+        {
+            var isLiked = _recipeLikeRepository.ListAllAsync().Result.Where(c => c.UserId == userId && c.RecipeId == recipeId);
+            if (isLiked.Any())
+            {
+                return isLiked.FirstOrDefault().IsLiked;
+            }
+            return false;
         }
 
         public async Task<RecipeComment> AddComment(RecipeComment comment)
