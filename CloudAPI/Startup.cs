@@ -29,6 +29,7 @@ using FluentValidation.AspNetCore;
 using CloudAPI.ApplicationCore.Interfaces;
 using CloudAPI.ApplicationCore.Services;
 using CloudAPI.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace CloudAPI
 {
@@ -61,7 +62,9 @@ namespace CloudAPI
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
-            
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration.GetSection(nameof(AuthMessageSenderOptions)));
+
             // jwt wire up
             // Get options from app settings
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
@@ -117,13 +120,14 @@ namespace CloudAPI
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 6;
+                o.SignIn.RequireConfirmedEmail = true;
             });
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
             builder.AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
             services.AddAutoMapper();
             services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);            
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
