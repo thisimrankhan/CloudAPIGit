@@ -3,6 +3,7 @@ namespace CloudAPI.Helpers
 {
     public static class Constants
     {
+        public const string FileUploadPath = nameof(FileUploadPath);
         public static class Strings
         {
             public static class JwtClaimIdentifiers
