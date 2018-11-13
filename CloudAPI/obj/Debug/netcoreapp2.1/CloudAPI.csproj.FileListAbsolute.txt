@@ -26,3 +26,17 @@ E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI
 E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.RazorTargetAssemblyInfo.cache
 E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.dll
 E:\Development\CloudAPIGit\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.pdb
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\bin\Debug\netcoreapp2.1\CloudAPI.deps.json
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\bin\Debug\netcoreapp2.1\CloudAPI.runtimeconfig.json
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\bin\Debug\netcoreapp2.1\CloudAPI.runtimeconfig.dev.json
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\bin\Debug\netcoreapp2.1\CloudAPI.dll
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\bin\Debug\netcoreapp2.1\CloudAPI.pdb
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.csprojAssemblyReference.cache
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.csproj.CoreCompileInputs.cache
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.RazorAssemblyInfo.cache
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.RazorAssemblyInfo.cs
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.AssemblyInfoInputs.cache
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.AssemblyInfo.cs
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.RazorTargetAssemblyInfo.cache
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.dll
+D:\Projects Local\Dot Net Projects\CloudAPIGit\CloudAPI\obj\Debug\netcoreapp2.1\CloudAPI.pdb

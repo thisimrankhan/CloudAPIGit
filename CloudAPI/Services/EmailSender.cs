@@ -23,21 +23,46 @@ namespace CloudAPI.ApplicationCore.Services
 
         public Task Execute(string apiKey, string subject, string message, string email)
         {
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
+            using (var client = new System.Net.Mail.SmtpClient())
             {
-                From = new EmailAddress(Options.From, Options.UserName),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(email));
+                var credential = new System.Net.NetworkCredential
+                {
+                    UserName = Options.From,
+                    Password = Options.Password
+                };
 
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-            msg.SetClickTracking(false, false);
+                client.Credentials = credential;
+                client.Host = Options.Host;
+                client.Port = int.Parse(Options.Port);
+                client.EnableSsl = true;
 
-            return client.SendEmailAsync(msg);
+                using (var emailMessage = new System.Net.Mail.MailMessage())
+                {
+                    emailMessage.To.Add(new System.Net.Mail.MailAddress(email));
+                    emailMessage.From = new System.Net.Mail.MailAddress(Options.From);
+                    emailMessage.Subject = subject;
+                    emailMessage.Body = message;
+                    emailMessage.IsBodyHtml = true;
+                    client.Send(emailMessage);
+                }
+            }
+            return Task.CompletedTask;
+
+            //var client = new SendGridClient(apiKey);
+            //var msg = new SendGridMessage()
+            //{
+            //    From = new EmailAddress(Options.From, Options.UserName),
+            //    Subject = subject,
+            //    PlainTextContent = message,
+            //    HtmlContent = message
+            //};
+            //msg.AddTo(new EmailAddress(email));
+
+            //// Disable click tracking.
+            //// See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
+            //msg.SetClickTracking(false, false);
+
+            //return client.SendEmailAsync(msg);
         }
     }
 }

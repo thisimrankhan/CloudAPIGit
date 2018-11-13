@@ -17,6 +17,7 @@ namespace CloudAPI.ViewModels
         public int Rating { get; set; }
         public int LikeCount { get; set; }
         public bool isLiked { get; set; }
+        public string Category { get; set; }
         public List<RecipeComment> Comments { get; set; }
         public DateTime RecipeDate { get; set; }
     }

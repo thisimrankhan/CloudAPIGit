@@ -12,5 +12,7 @@ namespace CloudAPI.ApplicationCore.Services
         public string Password { get; set; }
         public string SMTPServer { get; set; }
         public string APIKey { get; set; }
+        public string Port { get; set; }
+        public string Host { get; set; }
     }
 }

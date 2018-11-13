@@ -37,6 +37,14 @@ namespace CloudAPI.Controllers
             return new OkObjectResult(Recipe);
         }
 
+        // GET api/Recipe/GetRecipe
+        [HttpGet]
+        public IActionResult GetRecipeRatingByUserId(int recipeId, string userId)
+        {
+            var Recipe = _RecipeService.GetRecipeRatingByUserId(recipeId, userId);
+            return new OkObjectResult(Recipe);
+        }
+
         // GET api/Recipe/
         [HttpGet]
         public IActionResult GetRecipes()

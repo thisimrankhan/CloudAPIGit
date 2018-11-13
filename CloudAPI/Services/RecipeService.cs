@@ -72,6 +72,19 @@ namespace CloudAPI.ApplicationCore.Services
             return recipeView;
         }
 
+        public int GetRecipeRatingByUserId(int recipeId, string userId)
+        {
+            var rating = _recipeRatingRepository.ListAllAsync().Result.Where(c => c.RecipeId == recipeId && c.UserId == userId).FirstOrDefault();
+            if (rating != null)
+            {
+                return rating.Rating;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         private List<RecipeComment> GetComments(int recipeId)
         {
             var comments = _recipeCommentRepository.ListAllAsync().Result.Where(r => r.RecipeId == recipeId).OrderByDescending(r=> r.Id).ToList();

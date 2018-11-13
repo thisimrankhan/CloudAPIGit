@@ -41,10 +41,16 @@ namespace CloudAPI.Controllers
             var user = _userManager.Users.Where(u=> u.Id == verifyCode.Id).FirstOrDefault();
 
             IdentityResult result = null;
+            System.Exception ex;
             if(user.PhoneNumber == verifyCode.VerificationCode)
             {
                 user.EmailConfirmed = true;
                 result = await _userManager.UpdateAsync(user);
+            }
+            else
+            {
+                ex = new System.Exception("Verification Failed");
+                throw ex;
             }
             return new OkObjectResult(result);
         }

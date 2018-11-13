@@ -12,10 +12,11 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System;
 using System.Linq;
+using System.Net.Http;
 
 namespace CloudAPI.Controllers
 {
-    [Route("api/[controller]")] 
+    [Route("api/[controller]/[action]")]
     public class AccountsController : Controller
     {
         private readonly ApplicationDbContext _appDbContext;
@@ -31,6 +32,32 @@ namespace CloudAPI.Controllers
             _emailSender = emailSender;
         }
 
+        // POST api/accounts/sendemail
+        [HttpPost]
+        public async Task<IActionResult> SendEmail([FromBody]ResendEmailViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid || model.UserId == null)
+                {
+                    return BadRequest(ModelState);
+                }
+                var userIdentity = _userManager.Users.Where(c => c.Id == model.UserId.ToString()).FirstOrDefault();
+                if (userIdentity != null)
+                {
+                    await _emailSender.SendEmailAsync(userIdentity.Email, "Account Verification",
+                            $"Your email verification code is <b>{userIdentity.PhoneNumber}</b>.");
+
+                    return new OkObjectResult(userIdentity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return null;
+        }
+
         // POST api/accounts
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]RegistrationViewModel model)
@@ -40,7 +67,7 @@ namespace CloudAPI.Controllers
                 return BadRequest(ModelState);
             }
             Random rnd = new Random();
-            int numericCode = rnd.Next(1, 99999);
+            string numericCode = rnd.Next(1, 99999).ToString("D5");
 
             var userIdentity = _mapper.Map<AppUser>(model);
             userIdentity.FirstName = model.FullName;
